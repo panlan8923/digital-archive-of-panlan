@@ -1,6 +1,10 @@
 import { error } from '@sveltejs/kit';
-import { getProjectBySlug } from '$lib/data/projects';
+import { getAllProjectSlugs, getProjectBySlug } from '$lib/data/projects';
 import type { PageLoad } from './$types';
+
+export const prerender = true;
+
+export const entries = () => getAllProjectSlugs().map((slug) => ({ slug }));
 
 export const load: PageLoad = ({ params }) => {
 	const project = getProjectBySlug(params.slug);

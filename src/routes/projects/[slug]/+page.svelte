@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SiteFooter from '$lib/components/layout/SiteFooter.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
+	import { resolvePath } from '$lib/utils/path';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -17,7 +18,7 @@
 <div class="project-page">
 	<div class="project-page__main">
 		<header class="project-page__header">
-			<a class="project-page__back" href="/">← Archive</a>
+			<a class="project-page__back" href={resolvePath('/')}>← Archive</a>
 			<span class="project-page__number">{project.entryId}</span>
 		</header>
 
@@ -30,7 +31,7 @@
 				</p>
 			</div>
 			<div class="project-hero__cover">
-				<img src={project.coverImage} alt="" class="project-hero__cover-image" />
+				<img src={resolvePath(project.coverImage)} alt="" class="project-hero__cover-image" />
 			</div>
 		</section>
 
@@ -59,8 +60,8 @@
 								{#if highlight.kind === 'video'}
 									<video
 										class="project-spread__video"
-										src={highlight.src}
-										poster={highlight.poster}
+										src={resolvePath(highlight.src ?? '')}
+										poster={highlight.poster ? resolvePath(highlight.poster) : undefined}
 										controls
 										playsinline
 										preload="metadata"
@@ -70,7 +71,7 @@
 								{:else}
 									<img
 										class="project-spread__image"
-										src={highlight.image}
+										src={resolvePath(highlight.image ?? '')}
 										alt={highlight.title}
 										loading="lazy"
 									/>

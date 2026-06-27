@@ -2,6 +2,7 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import IconButton from '$lib/components/ui/IconButton.svelte';
 	import { getProjectByEntryId } from '$lib/data/projects';
+	import { resolvePath } from '$lib/utils/path';
 	import type { ArchiveEntry } from '$lib/types/archive.types';
 
 	interface Props {
@@ -47,7 +48,7 @@
 		</div>
 
 		<div class="detail-panel__media">
-			<img class="detail-panel__image" src={entry.image} alt="" />
+			<img class="detail-panel__image" src={resolvePath(entry.image)} alt="" />
 		</div>
 	</div>
 </aside>

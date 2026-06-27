@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolvePath } from '$lib/utils/path';
+
 	interface Props {
 		label: string;
 		arrow?: boolean;
@@ -8,12 +10,14 @@
 	}
 
 	let { label, arrow = false, href, download = false, onclick }: Props = $props();
+
+	const resolvedHref = $derived(href ? resolvePath(href) : undefined);
 </script>
 
-{#if href}
+{#if resolvedHref}
 	<a
 		class="ui-button"
-		{href}
+		href={resolvedHref}
 		download={download ? '' : undefined}
 		target={download ? undefined : undefined}
 		rel={download ? undefined : undefined}
