@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolvePath } from '$lib/utils/path';
+	import { skipArchiveIndexOnce } from '$lib/utils/indexing-session';
 	import type { SiteView } from '$lib/types/site.types';
 
 	const navItems: { label: string; view: SiteView }[] = [
@@ -31,7 +32,7 @@
 <nav class="site-nav" class:site-nav--pending={!visible} aria-label="Site">
 	{#each navItems as item (item.label)}
 		{#if linkMode}
-			<a class="site-nav__link" href={hrefFor(item.view)}>
+			<a class="site-nav__link" href={hrefFor(item.view)} onclick={skipArchiveIndexOnce}>
 				{item.label}
 			</a>
 		{:else}

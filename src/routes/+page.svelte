@@ -9,6 +9,7 @@
 	import SiteHeader from '$lib/components/layout/SiteHeader.svelte';
 	import type { SiteView } from '$lib/types/site.types';
 	import { archiveEntryCount, getEntryById } from '$lib/utils/archive';
+	import { consumeArchiveIndexSkip } from '$lib/utils/indexing-session';
 	import { resolvePath } from '$lib/utils/path';
 	import { onMount, tick } from 'svelte';
 
@@ -23,6 +24,7 @@
 
 	function shouldPlayIndexSequence(): boolean {
 		if (!browser) return false;
+		if (consumeArchiveIndexSkip()) return false;
 		return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
 

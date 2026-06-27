@@ -3,6 +3,7 @@
 	import SiteNav from '$lib/components/layout/SiteNav.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { resolvePath } from '$lib/utils/path';
+	import { skipArchiveIndexOnce } from '$lib/utils/indexing-session';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -20,7 +21,7 @@
 	<div class="project-page__main">
 		<header class="project-page__header">
 			<div class="project-page__header-start">
-				<a class="project-page__back" href={resolvePath('/')}>← Archive</a>
+				<a class="project-page__back" href={resolvePath('/')} onclick={skipArchiveIndexOnce}>← Archive</a>
 				<span class="project-page__entry-number archive-entry-number">{project.entryId}</span>
 			</div>
 			<div class="project-page__header-end">
