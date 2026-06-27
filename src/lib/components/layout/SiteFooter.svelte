@@ -10,7 +10,7 @@
 </script>
 
 <footer class="site-footer" class:site-footer--pending={!visible}>
-	<p class="site-footer__copyright">© 2025 PAN LAN. All rights reserved.</p>
+	<p class="site-footer__copyright">© PAN LAN. All rights reserved.</p>
 	<div class="site-footer__sound">
 		<span class="site-footer__sound-label">Sound</span>
 		<Toggle bind:enabled={soundEnabled} />

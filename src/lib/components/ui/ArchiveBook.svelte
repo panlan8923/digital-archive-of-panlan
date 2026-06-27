@@ -11,7 +11,11 @@
 	let { entry, selected = false, revealed = true, onselect }: Props = $props();
 </script>
 
-<div class="archive-book-wrap" class:archive-book-wrap--pending={!revealed}>
+<div
+	class="archive-book-wrap"
+	class:archive-book-wrap--pending={!revealed}
+	class:archive-book-wrap--selected={selected}
+>
 	<button
 		type="button"
 		class="archive-book"
@@ -21,8 +25,10 @@
 		tabindex={revealed ? 0 : -1}
 		onclick={() => onselect?.(entry.id)}
 	>
-		<span class="archive-book__number">{entry.number}</span>
+		<span class="archive-book__number archive-entry-number">{entry.number}</span>
 		<span class="archive-book__title">{entry.title}</span>
-		<span class="archive-book__meta">{entry.category} / {entry.year}</span>
+		<span class="archive-book__meta">
+			{entry.year ? `${entry.category} / ${entry.year}` : entry.category}
+		</span>
 	</button>
 </div>

@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import AboutPanel from '$lib/components/archive/AboutPanel.svelte';
 	import ArchiveGallery from '$lib/components/archive/ArchiveGallery.svelte';
 	import ArchiveIndexStatus from '$lib/components/archive/ArchiveIndexStatus.svelte';
+	import ContactPanel from '$lib/components/archive/ContactPanel.svelte';
 	import DetailPanel from '$lib/components/archive/DetailPanel.svelte';
 	import SiteFooter from '$lib/components/layout/SiteFooter.svelte';
 	import SiteHeader from '$lib/components/layout/SiteHeader.svelte';
+	import type { SiteView } from '$lib/types/site.types';
 	import { archiveEntryCount, getEntryById } from '$lib/utils/archive';
+	import { resolvePath } from '$lib/utils/path';
 	import { onMount, tick } from 'svelte';
 
 	const PHASE_MS = 2000;
@@ -22,8 +26,15 @@
 		return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
 
+	function viewFromHash(hash: string): SiteView {
+		if (hash === '#about') return 'about';
+		if (hash === '#contact') return 'contact';
+		return 'archive';
+	}
+
 	function createIndexState() {
 		const play = shouldPlayIndexSequence();
+		const initialView = browser ? viewFromHash(window.location.hash) : 'archive';
 
 		return {
 			play,
@@ -36,7 +47,8 @@
 			footerVisible: !play,
 			revealedCount: play ? 0 : archiveEntryCount,
 			statusVisible: play,
-			statusComplete: false
+			statusComplete: false,
+			activeView: initialView as SiteView
 		};
 	}
 
@@ -44,6 +56,7 @@
 
 	let selectedId = $state<string | null>(null);
 	let soundEnabled = $state(true);
+	let activeView = $state<SiteView>(initialIndexState.activeView);
 
 	let isIndexing = $state(initialIndexState.isIndexing);
 	let plainBackground = $state(initialIndexState.plainBackground);
@@ -58,17 +71,70 @@
 
 	const selectedEntry = $derived(selectedId ? getEntryById(selectedId) : undefined);
 
-	function handleSelect(id: string) {
-		if (isIndexing) return;
-		selectedId = selectedId === id ? null : id;
+	function updateHash(view: SiteView) {
+		if (!browser) return;
+		const nextUrl = view === 'archive' ? resolvePath('/') : resolvePath(`/#${view}`);
+		window.history.replaceState(null, '', nextUrl);
 	}
 
-	function handleClose() {
+	function scrollToPanel(id: string) {
+		tick().then(() => {
+			const panel = document.getElementById(id);
+			if (!panel) return;
+
+			const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			panel.scrollIntoView({
+				behavior: reducedMotion ? 'instant' : 'smooth',
+				block: 'start'
+			});
+		});
+	}
+
+	function handleNavSelect(view: SiteView) {
+		if (isIndexing) return;
+
+		activeView = view;
+		selectedId = null;
+		updateHash(view);
+
+		if (view === 'about') scrollToPanel('about-panel');
+		if (view === 'contact') scrollToPanel('contact-panel');
+		if (view === 'archive') {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+	}
+
+	function handleSelect(id: string) {
+		if (isIndexing) return;
+		activeView = 'archive';
+		selectedId = selectedId === id ? null : id;
+		updateHash('archive');
+	}
+
+	function handleCloseDetail() {
 		selectedId = null;
 	}
 
+	function handleCloseInfo() {
+		activeView = 'archive';
+		updateHash('archive');
+	}
+
 	onMount(() => {
-		if (!initialIndexState.play) return;
+		if (initialIndexState.activeView === 'about') scrollToPanel('about-panel');
+		if (initialIndexState.activeView === 'contact') scrollToPanel('contact-panel');
+
+		const onHashChange = () => {
+			if (isIndexing) return;
+			activeView = viewFromHash(window.location.hash);
+			selectedId = null;
+		};
+
+		window.addEventListener('hashchange', onHashChange);
+
+		if (!initialIndexState.play) {
+			return () => window.removeEventListener('hashchange', onHashChange);
+		}
 
 		const timeouts: ReturnType<typeof setTimeout>[] = [];
 		const schedule = (delay: number, fn: () => void) => {
@@ -95,6 +161,9 @@
 			navVisible = true;
 			footerVisible = true;
 			isIndexing = false;
+
+			if (activeView === 'about') scrollToPanel('about-panel');
+			if (activeView === 'contact') scrollToPanel('contact-panel');
 		});
 
 		schedule(STATUS_HIDE_MS, () => {
@@ -103,22 +172,14 @@
 
 		return () => {
 			for (const timeout of timeouts) clearTimeout(timeout);
+			window.removeEventListener('hashchange', onHashChange);
 		};
 	});
 
 	$effect(() => {
-		if (!selectedId || isIndexing) return;
+		if (!selectedId || isIndexing || activeView !== 'archive') return;
 
-		tick().then(() => {
-			const panel = document.getElementById('detail-panel');
-			if (!panel) return;
-
-			const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-			panel.scrollIntoView({
-				behavior: reducedMotion ? 'instant' : 'smooth',
-				block: 'start'
-			});
-		});
+		scrollToPanel('detail-panel');
 	});
 </script>
 
@@ -128,15 +189,30 @@
 	class:gallery-page--indexing={isIndexing}
 >
 	<div class="gallery-page__main">
-		<SiteHeader {typewriterActive} {metaVisible} {navVisible} {dividerVisible} />
+		<SiteHeader
+			{typewriterActive}
+			{metaVisible}
+			{navVisible}
+			{dividerVisible}
+			{activeView}
+			onnavselect={handleNavSelect}
+		/>
 
 		<div class="gallery-page__gallery">
 			<ArchiveGallery {selectedId} {revealedCount} onselect={handleSelect} />
 		</div>
 	</div>
 
-	{#if selectedEntry && !isIndexing}
-		<DetailPanel entry={selectedEntry} onclose={handleClose} />
+	{#if selectedEntry && activeView === 'archive' && !isIndexing}
+		<DetailPanel entry={selectedEntry} onclose={handleCloseDetail} />
+	{/if}
+
+	{#if activeView === 'about' && !isIndexing}
+		<AboutPanel onclose={handleCloseInfo} />
+	{/if}
+
+	{#if activeView === 'contact' && !isIndexing}
+		<ContactPanel onclose={handleCloseInfo} />
 	{/if}
 
 	<SiteFooter bind:soundEnabled visible={footerVisible} />

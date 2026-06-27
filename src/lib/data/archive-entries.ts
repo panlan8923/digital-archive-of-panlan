@@ -1,4 +1,4 @@
-import type { ArchiveEntry, NavItem } from '$lib/types/archive.types';
+import type { ArchiveEntry } from '$lib/types/archive.types';
 import { getProjectByEntryId } from '$lib/data/projects';
 
 function parseProjectLine(line: string): Pick<ArchiveEntry, 'title' | 'category' | 'description'> {
@@ -16,7 +16,7 @@ function parseProjectLine(line: string): Pick<ArchiveEntry, 'title' | 'category'
 
 	return {
 		title,
-		category: 'Archive Entry',
+		category: 'Independent Research',
 		description: `${title}. Archive documentation forthcoming.`
 	};
 }
@@ -54,7 +54,7 @@ function createEntry(id: string, line: string, shelf: 1 | 2): ArchiveEntry {
 		number: id,
 		title: parsed.title,
 		category: parsed.category,
-		year: '—',
+		year: '',
 		shelf,
 		description: parsed.description,
 		indexItems: [
@@ -89,8 +89,3 @@ export const archiveEntries: ArchiveEntry[] = projectLines.map((line, index) => 
 	return createEntry(id, line, shelf);
 });
 
-export const navItems: NavItem[] = [
-	{ label: 'ARCHIVE', href: '/', active: true },
-	{ label: 'ABOUT', href: '/#about' },
-	{ label: 'CONTACT', href: '/#contact' }
-];

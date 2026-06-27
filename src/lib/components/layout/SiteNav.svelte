@@ -1,18 +1,48 @@
 <script lang="ts">
-	import { navItems } from '$lib/data/archive-entries';
+	import { resolvePath } from '$lib/utils/path';
+	import type { SiteView } from '$lib/types/site.types';
+
+	const navItems: { label: string; view: SiteView }[] = [
+		{ label: 'ARCHIVE', view: 'archive' },
+		{ label: 'ABOUT', view: 'about' },
+		{ label: 'CONTACT', view: 'contact' }
+	];
 
 	interface Props {
+		activeView?: SiteView | null;
+		onselect?: (view: SiteView) => void;
 		visible?: boolean;
+		linkMode?: boolean;
 	}
 
-	let { visible = true }: Props = $props();
+	let {
+		activeView = 'archive',
+		onselect,
+		visible = true,
+		linkMode = false
+	}: Props = $props();
+
+	function hrefFor(view: SiteView): string {
+		if (view === 'archive') return resolvePath('/');
+		return resolvePath(`/#${view}`);
+	}
 </script>
 
 <nav class="site-nav" class:site-nav--pending={!visible} aria-label="Site">
 	{#each navItems as item (item.label)}
-		<button type="button" class="site-nav__link" class:site-nav__link--active={item.active}>
-			{item.label}
-		</button>
+		{#if linkMode}
+			<a class="site-nav__link" href={hrefFor(item.view)}>
+				{item.label}
+			</a>
+		{:else}
+			<button
+				type="button"
+				class="site-nav__link"
+				class:site-nav__link--active={activeView === item.view}
+				onclick={() => onselect?.(item.view)}
+			>
+				{item.label}
+			</button>
+		{/if}
 	{/each}
-	<button type="button" class="site-nav__info" aria-label="Information">i</button>
 </nav>

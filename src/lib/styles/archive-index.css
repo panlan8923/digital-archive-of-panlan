@@ -92,17 +92,12 @@
 	pointer-events: none;
 }
 
-.archive-book-wrap {
-	opacity: 1;
-	transform: translateY(0);
+.archive-book-wrap--pending {
+	opacity: 0;
+	transform: translate3d(0, 10px, 0);
 	transition:
 		opacity 700ms var(--ease-out),
 		transform 700ms var(--ease-out);
-}
-
-.archive-book-wrap--pending {
-	opacity: 0;
-	transform: translateY(10px);
 }
 
 .archive-index-status {

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SiteFooter from '$lib/components/layout/SiteFooter.svelte';
+	import SiteNav from '$lib/components/layout/SiteNav.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
 	import { resolvePath } from '$lib/utils/path';
 	import type { PageData } from './$types';
@@ -18,13 +19,22 @@
 <div class="project-page">
 	<div class="project-page__main">
 		<header class="project-page__header">
-			<a class="project-page__back" href={resolvePath('/')}>← Archive</a>
-			<span class="project-page__number">{project.entryId}</span>
+			<div class="project-page__header-start">
+				<a class="project-page__back" href={resolvePath('/')}>← Archive</a>
+				<span class="project-page__entry-number archive-entry-number">{project.entryId}</span>
+			</div>
+			<div class="project-page__header-end">
+				<SiteNav linkMode />
+			</div>
 		</header>
 
 		<section class="project-hero">
 			<div class="project-hero__text">
-				<p class="project-hero__eyebrow">{project.subtitle}</p>
+				<p class="project-hero__eyebrow">
+					<span class="archive-entry-number">{project.entryId}</span>
+					<span aria-hidden="true"> — </span>
+					{project.subtitle}
+				</p>
 				<h1 class="project-hero__title">{project.title}</h1>
 				<p class="project-hero__meta">
 					{project.authors} / {project.year}

@@ -19,9 +19,11 @@
 	<div class="detail-panel__inner">
 		<div class="detail-panel__meta">
 			<IconButton label="Close" onclick={onclose} />
-			<span class="detail-panel__number">{entry.number}</span>
+			<span class="detail-panel__number archive-entry-number">{entry.number}</span>
 			<h2 class="detail-panel__title">{entry.title}</h2>
-			<p class="detail-panel__category">{entry.category} / {entry.year}</p>
+			<p class="detail-panel__category">
+				{entry.year ? `${entry.category} / ${entry.year}` : entry.category}
+			</p>
 		</div>
 
 		<div class="detail-panel__body">
