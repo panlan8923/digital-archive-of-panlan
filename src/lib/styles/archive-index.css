@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Archive Index Sequence — first-visit assembly animation
+   Archive Index Sequence — homepage assembly animation
    ========================================================================== */
 
 .gallery-page--plain {
@@ -35,21 +35,21 @@
 	opacity: 1;
 	transform: scaleX(1);
 	transition:
-		transform 250ms var(--ease-out),
-		opacity var(--duration-fast) var(--ease-out);
+		transform 1400ms var(--ease-out),
+		opacity 600ms var(--ease-out);
 }
 
 .site-identity__title-line {
 	opacity: 1;
 	transform: translateY(0);
 	transition:
-		opacity var(--duration-normal) var(--ease-out),
-		transform var(--duration-normal) var(--ease-out);
+		opacity 2000ms var(--ease-out),
+		transform 2000ms var(--ease-out);
 }
 
 .site-identity__title-line--pending {
 	opacity: 0;
-	transform: translateY(4px);
+	transform: translateY(6px);
 }
 
 .site-identity__subtitle,
@@ -83,13 +83,13 @@
 	opacity: 1;
 	transform: translateY(0);
 	transition:
-		opacity 200ms var(--ease-out),
-		transform 200ms var(--ease-out);
+		opacity 700ms var(--ease-out),
+		transform 700ms var(--ease-out);
 }
 
 .archive-book-wrap--pending {
 	opacity: 0;
-	transform: translateY(8px);
+	transform: translateY(10px);
 }
 
 .archive-index-status {
@@ -104,7 +104,7 @@
 	text-transform: uppercase;
 	color: var(--color-text-subtle);
 	opacity: 0;
-	transition: opacity var(--duration-fast) var(--ease-out);
+	transition: opacity var(--duration-normal) var(--ease-out);
 }
 
 .archive-index-status--visible {

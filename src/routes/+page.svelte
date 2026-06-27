@@ -6,23 +6,24 @@
 	import SiteFooter from '$lib/components/layout/SiteFooter.svelte';
 	import SiteHeader from '$lib/components/layout/SiteHeader.svelte';
 	import { archiveEntryCount, getEntryById } from '$lib/utils/archive';
-	import { markIndexSequenceSeen, shouldPlayIndexSequence } from '$lib/utils/indexing-session';
 	import { onMount, tick } from 'svelte';
 
-	const BOOK_STAGGER_MS = 65;
-	const TITLE_DELAY_MS = 100;
-	const DIVIDER_DELAY_MS = 300;
-	const BOOKS_START_MS = 450;
-	const STATUS_COMPLETE_MS = 1280;
-	const UNLOCK_MS = 1350;
-	const STATUS_HIDE_MS = 1500;
+	const PHASE_MS = 2000;
+	const TOTAL_MS = 4000;
+	const DIVIDER_START_MS = 500;
+	const BOOKS_START_MS = PHASE_MS;
+	const BOOK_STAGGER_MS = Math.floor(PHASE_MS / archiveEntryCount);
+	const STATUS_COMPLETE_MS = TOTAL_MS - 200;
+	const UNLOCK_MS = TOTAL_MS;
+	const STATUS_HIDE_MS = TOTAL_MS + 400;
+
+	function shouldPlayIndexSequence(): boolean {
+		if (!browser) return false;
+		return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	}
 
 	function createIndexState() {
-		const play = browser && shouldPlayIndexSequence();
-
-		if (play) {
-			markIndexSequenceSeen();
-		}
+		const play = shouldPlayIndexSequence();
 
 		return {
 			play,
@@ -74,11 +75,11 @@
 			timeouts.push(setTimeout(fn, delay));
 		};
 
-		schedule(TITLE_DELAY_MS, () => {
+		schedule(0, () => {
 			titleVisible = true;
 		});
 
-		schedule(DIVIDER_DELAY_MS, () => {
+		schedule(DIVIDER_START_MS, () => {
 			dividerVisible = true;
 		});
 
