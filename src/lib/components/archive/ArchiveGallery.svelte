@@ -4,16 +4,17 @@
 
 	interface Props {
 		selectedId?: string | null;
+		revealedCount?: number;
 		onselect?: (id: string) => void;
 	}
 
-	let { selectedId = null, onselect }: Props = $props();
+	let { selectedId = null, revealedCount = 13, onselect }: Props = $props();
 
 	const shelfOne = getEntriesByShelf(1);
 	const shelfTwo = getEntriesByShelf(2);
 </script>
 
 <section class="archive-gallery" aria-label="Archive gallery">
-	<BookshelfRow entries={shelfOne} {selectedId} {onselect} />
-	<BookshelfRow entries={shelfTwo} {selectedId} {onselect} />
+	<BookshelfRow entries={shelfOne} {selectedId} {revealedCount} {onselect} />
+	<BookshelfRow entries={shelfTwo} {selectedId} {revealedCount} {onselect} />
 </section>

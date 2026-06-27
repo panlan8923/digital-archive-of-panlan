@@ -4,19 +4,21 @@
 	interface Props {
 		entry: ArchiveEntry;
 		selected?: boolean;
+		revealed?: boolean;
 		onselect?: (id: string) => void;
 	}
 
-	let { entry, selected = false, onselect }: Props = $props();
+	let { entry, selected = false, revealed = true, onselect }: Props = $props();
 </script>
 
-<div class="archive-book-wrap">
+<div class="archive-book-wrap" class:archive-book-wrap--pending={!revealed}>
 	<button
 		type="button"
 		class="archive-book"
 		class:archive-book--selected={selected}
 		aria-pressed={selected}
 		aria-label="{entry.number} {entry.title}"
+		tabindex={revealed ? 0 : -1}
 		onclick={() => onselect?.(entry.id)}
 	>
 		<span class="archive-book__number">{entry.number}</span>

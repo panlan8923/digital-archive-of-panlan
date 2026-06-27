@@ -4,10 +4,16 @@
 
 .site-header {
 	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin-bottom: var(--space-6);
+}
+
+.site-header__row {
+	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
 	gap: var(--space-8);
-	margin-bottom: var(--space-6);
 }
 
 .site-identity__title {

@@ -1,6 +1,8 @@
 import { archiveEntries } from '$lib/data/archive-entries';
 import type { ArchiveEntry } from '$lib/types/archive.types';
 
+export const archiveEntryCount = archiveEntries.length;
+
 export function getEntryById(id: string): ArchiveEntry | undefined {
 	return archiveEntries.find((entry) => entry.id === id);
 }

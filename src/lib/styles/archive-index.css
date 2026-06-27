@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Archive Index Sequence — first-visit assembly animation
+   ========================================================================== */
+
+.gallery-page--plain {
+	background: #ffffff;
+}
+
+.gallery-page--plain::before,
+.gallery-page--plain::after {
+	opacity: 0;
+	transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.gallery-page:not(.gallery-page--plain)::before,
+.gallery-page:not(.gallery-page--plain)::after {
+	transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.gallery-page--indexing {
+	pointer-events: none;
+}
+
+.archive-index-divider {
+	height: var(--border-width-thin);
+	margin-top: var(--space-4);
+	margin-bottom: var(--space-2);
+	background: var(--color-border);
+	transform: scaleX(0);
+	transform-origin: left center;
+	opacity: 0;
+}
+
+.archive-index-divider--visible {
+	opacity: 1;
+	transform: scaleX(1);
+	transition:
+		transform 250ms var(--ease-out),
+		opacity var(--duration-fast) var(--ease-out);
+}
+
+.site-identity__title-line {
+	opacity: 1;
+	transform: translateY(0);
+	transition:
+		opacity var(--duration-normal) var(--ease-out),
+		transform var(--duration-normal) var(--ease-out);
+}
+
+.site-identity__title-line--pending {
+	opacity: 0;
+	transform: translateY(4px);
+}
+
+.site-identity__subtitle,
+.site-identity__hint {
+	opacity: 1;
+	transform: translateY(0);
+	transition:
+		opacity var(--duration-normal) var(--ease-out),
+		transform var(--duration-normal) var(--ease-out);
+}
+
+.site-identity__subtitle--pending,
+.site-identity__hint--pending {
+	opacity: 0;
+	transform: translateY(4px);
+}
+
+.site-nav,
+.site-footer {
+	opacity: 1;
+	transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.site-nav--pending,
+.site-footer--pending {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.archive-book-wrap {
+	opacity: 1;
+	transform: translateY(0);
+	transition:
+		opacity 200ms var(--ease-out),
+		transform 200ms var(--ease-out);
+}
+
+.archive-book-wrap--pending {
+	opacity: 0;
+	transform: translateY(8px);
+}
+
+.archive-index-status {
+	position: fixed;
+	left: var(--page-padding-inline);
+	bottom: var(--page-padding-block);
+	z-index: 50;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-xs);
+	line-height: var(--line-height-snug);
+	letter-spacing: var(--letter-spacing-wider);
+	text-transform: uppercase;
+	color: var(--color-text-subtle);
+	opacity: 0;
+	transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.archive-index-status--visible {
+	opacity: 1;
+}
+
+.archive-index-status__label {
+	margin: 0;
+}
+
+.archive-index-status__count {
+	margin: var(--space-1) 0 0;
+}
