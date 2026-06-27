@@ -97,8 +97,8 @@
 		selectedId = null;
 		updateHash(view);
 
-		if (view === 'about') scrollToPanel('about-panel');
-		if (view === 'contact') scrollToPanel('contact-panel');
+		if (view === 'about') scrollToPanel('about');
+		if (view === 'contact') scrollToPanel('contact');
 		if (view === 'archive') {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		}
@@ -121,8 +121,8 @@
 	}
 
 	onMount(() => {
-		if (initialIndexState.activeView === 'about') scrollToPanel('about-panel');
-		if (initialIndexState.activeView === 'contact') scrollToPanel('contact-panel');
+		if (initialIndexState.activeView === 'about') scrollToPanel('about');
+		if (initialIndexState.activeView === 'contact') scrollToPanel('contact');
 
 		const onHashChange = () => {
 			if (isIndexing) return;
@@ -162,8 +162,8 @@
 			footerVisible = true;
 			isIndexing = false;
 
-			if (activeView === 'about') scrollToPanel('about-panel');
-			if (activeView === 'contact') scrollToPanel('contact-panel');
+			if (activeView === 'about') scrollToPanel('about');
+			if (activeView === 'contact') scrollToPanel('contact');
 		});
 
 		schedule(STATUS_HIDE_MS, () => {
@@ -207,12 +207,9 @@
 		<DetailPanel entry={selectedEntry} onclose={handleCloseDetail} />
 	{/if}
 
-	{#if activeView === 'about' && !isIndexing}
-		<AboutPanel onclose={handleCloseInfo} />
-	{/if}
-
-	{#if activeView === 'contact' && !isIndexing}
-		<ContactPanel onclose={handleCloseInfo} />
+	{#if !isIndexing}
+		<AboutPanel hidden={activeView !== 'about'} onclose={handleCloseInfo} />
+		<ContactPanel hidden={activeView !== 'contact'} onclose={handleCloseInfo} />
 	{/if}
 
 	<SiteFooter bind:soundEnabled visible={footerVisible} />

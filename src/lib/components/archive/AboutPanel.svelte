@@ -3,13 +3,14 @@
 	import { aboutIntro, aboutSections } from '$lib/data/site-content';
 
 	interface Props {
+		hidden?: boolean;
 		onclose?: () => void;
 	}
 
-	let { onclose }: Props = $props();
+	let { hidden = false, onclose }: Props = $props();
 </script>
 
-<InfoPanel id="about-panel" label="About" title={aboutIntro.title} {onclose}>
+<InfoPanel id="about" label="About" title={aboutIntro.title} {hidden} {onclose}>
 	<p class="info-panel__span">{aboutIntro.span}</p>
 
 	{#each aboutSections as section (section.number)}

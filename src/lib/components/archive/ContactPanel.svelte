@@ -3,17 +3,19 @@
 	import { contactIntro, contactLinks, contactName } from '$lib/data/site-content';
 
 	interface Props {
+		hidden?: boolean;
 		onclose?: () => void;
 	}
 
-	let { onclose }: Props = $props();
+	let { hidden = false, onclose }: Props = $props();
 </script>
 
 <InfoPanel
-	id="contact-panel"
+	id="contact"
 	label="Contact"
 	eyebrow={contactIntro.eyebrow}
 	title={contactIntro.title}
+	{hidden}
 	{onclose}
 >
 	<p class="info-panel__name">{contactName}</p>

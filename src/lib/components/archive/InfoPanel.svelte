@@ -6,14 +6,15 @@
 		label: string;
 		eyebrow?: string;
 		title: string;
+		hidden?: boolean;
 		onclose?: () => void;
 		children: import('svelte').Snippet;
 	}
 
-	let { id, label, eyebrow = '', title, onclose, children }: Props = $props();
+	let { id, label, eyebrow = '', title, hidden = false, onclose, children }: Props = $props();
 </script>
 
-<aside {id} class="info-panel" aria-label={label}>
+<aside {id} class="info-panel" aria-label={label} {hidden}>
 	<div class="info-panel__inner">
 		<header class="info-panel__header">
 			<div class="info-panel__heading">
