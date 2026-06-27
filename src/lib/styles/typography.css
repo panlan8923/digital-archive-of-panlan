@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Typography System
+   All text roles for PAN LAN — DIGITAL ARCHIVE.
+   Use these classes — do not set font properties in components.
+   ========================================================================== */
+
+.text-display {
+	font-family: var(--font-display);
+	font-size: var(--font-size-3xl);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--line-height-tight);
+	letter-spacing: var(--letter-spacing-tight);
+	text-transform: uppercase;
+}
+
+.text-heading {
+	font-family: var(--font-display);
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-snug);
+	letter-spacing: var(--letter-spacing-normal);
+}
+
+.text-body {
+	font-family: var(--font-body);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-normal);
+}
+
+.text-caption {
+	font-family: var(--font-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--line-height-normal);
+	letter-spacing: var(--letter-spacing-normal);
+	color: var(--color-text-muted);
+}
+
+.text-label {
+	font-family: var(--font-body);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-snug);
+	letter-spacing: var(--letter-spacing-wider);
+	text-transform: uppercase;
+}
+
+.text-archive-number {
+	font-family: var(--font-mono);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--line-height-snug);
+	letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-year {
+	font-family: var(--font-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-regular);
+	line-height: var(--line-height-snug);
+	letter-spacing: var(--letter-spacing-widest);
+	text-transform: uppercase;
+	color: var(--color-text-subtle);
+}

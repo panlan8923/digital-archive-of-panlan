@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Design Tokens
+   All visual values for the project. Components must reference these tokens.
+   ========================================================================== */
+
+:root {
+	/* --------------------------------------------------------------------------
+	   Colors
+	   -------------------------------------------------------------------------- */
+	--color-bg: #f7f7f5;
+	--color-bg-subtle: #efefed;
+	--color-surface: #fafaf8;
+	--color-surface-highlight: #ffffff;
+	--color-surface-shadow: #e4e4e0;
+	--color-edge-light: rgba(255, 255, 255, 0.92);
+	--color-edge-dark: rgba(0, 0, 0, 0.14);
+	--color-text: #1a1a1a;
+	--color-text-muted: #666666;
+	--color-text-subtle: #999999;
+	--color-border: #cccccc;
+	--color-border-subtle: #e5e5e5;
+	--color-accent: #1a1a1a;
+	--color-accent-hover: #404040;
+	--color-focus: #1a1a1a;
+	--color-inverse-bg: #1a1a1a;
+	--color-inverse-text: #ffffff;
+
+	/* --------------------------------------------------------------------------
+	   Typography — Families
+	   -------------------------------------------------------------------------- */
+	--font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, monospace;
+
+	/* --------------------------------------------------------------------------
+	   Typography — Scale
+	   -------------------------------------------------------------------------- */
+	--font-size-xs: 0.6875rem; /* 11px */
+	--font-size-sm: 0.8125rem; /* 13px */
+	--font-size-base: 1rem; /* 16px */
+	--font-size-md: 1.125rem; /* 18px */
+	--font-size-lg: 1.5rem; /* 24px */
+	--font-size-xl: 2rem; /* 32px */
+	--font-size-2xl: 3rem; /* 48px */
+	--font-size-3xl: 4.5rem; /* 72px */
+
+	/* --------------------------------------------------------------------------
+	   Typography — Weights
+	   -------------------------------------------------------------------------- */
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-bold: 700;
+
+	/* --------------------------------------------------------------------------
+	   Typography — Line Heights
+	   -------------------------------------------------------------------------- */
+	--line-height-tight: 1.1;
+	--line-height-snug: 1.25;
+	--line-height-normal: 1.5;
+	--line-height-relaxed: 1.75;
+
+	/* --------------------------------------------------------------------------
+	   Typography — Letter Spacing
+	   -------------------------------------------------------------------------- */
+	--letter-spacing-tight: -0.02em;
+	--letter-spacing-normal: 0;
+	--letter-spacing-wide: 0.06em;
+	--letter-spacing-wider: 0.12em;
+	--letter-spacing-widest: 0.2em;
+
+	/* --------------------------------------------------------------------------
+	   Spacing Scale (4px base)
+	   -------------------------------------------------------------------------- */
+	--space-1: 0.25rem; /* 4px */
+	--space-2: 0.5rem; /* 8px */
+	--space-3: 0.75rem; /* 12px */
+	--space-4: 1rem; /* 16px */
+	--space-5: 1.5rem; /* 24px */
+	--space-6: 2rem; /* 32px */
+	--space-8: 3rem; /* 48px */
+	--space-10: 4rem; /* 64px */
+	--space-12: 6rem; /* 96px */
+	--space-16: 8rem; /* 128px */
+
+	/* --------------------------------------------------------------------------
+	   Layout
+	   -------------------------------------------------------------------------- */
+	--max-width-content: 80rem;
+	--max-width-prose: 42rem;
+	--page-padding-inline: var(--space-8);
+	--page-padding-block: var(--space-6);
+
+	/* Gallery & Books */
+	--book-width: 7.25rem;
+	--book-height: 17.5rem;
+	--book-gap: var(--space-4);
+	--shelf-thickness: 0.75rem;
+	--book-depth: 6px;
+
+	/* Light source: top-left → shadows fall bottom-right */
+	--shadow-contact: 0 1px 3px rgba(0, 0, 0, 0.14);
+	--shadow-book:
+		var(--shadow-contact),
+		inset 1px 0 0 rgba(255, 255, 255, 0.55),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+		3px 5px 10px rgba(0, 0, 0, 0.08),
+		6px 12px 28px rgba(0, 0, 0, 0.11),
+		10px 24px 48px rgba(0, 0, 0, 0.07);
+	--shadow-book-hover:
+		var(--shadow-contact),
+		inset 1px 0 0 rgba(255, 255, 255, 0.55),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+		4px 8px 16px rgba(0, 0, 0, 0.1),
+		8px 16px 36px rgba(0, 0, 0, 0.13),
+		14px 28px 56px rgba(0, 0, 0, 0.08);
+	--shadow-shelf:
+		inset 0 1px 0 var(--color-edge-light),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.04),
+		0 3px 6px rgba(0, 0, 0, 0.08),
+		0 8px 20px rgba(0, 0, 0, 0.09),
+		0 16px 40px rgba(0, 0, 0, 0.05);
+	--shadow-panel:
+		inset 0 1px 0 var(--color-edge-light),
+		0 2px 6px rgba(0, 0, 0, 0.05),
+		0 8px 24px rgba(0, 0, 0, 0.08),
+		0 20px 48px rgba(0, 0, 0, 0.06);
+
+	/* Detail Panel */
+	--panel-min-height: 14rem;
+
+	/* --------------------------------------------------------------------------
+	   Radius
+	   -------------------------------------------------------------------------- */
+	--radius-none: 0;
+	--radius-sm: 2px;
+	--radius-md: 4px;
+	--radius-lg: 8px;
+	--radius-full: 9999px;
+
+	/* --------------------------------------------------------------------------
+	   Borders
+	   -------------------------------------------------------------------------- */
+	--border-width-thin: 1px;
+	--border-width-medium: 2px;
+	--border-width-thick: 3px;
+
+	/* --------------------------------------------------------------------------
+	   Motion — Duration
+	   -------------------------------------------------------------------------- */
+	--duration-instant: 0ms;
+	--duration-fast: 120ms;
+	--duration-normal: 240ms;
+	--duration-slow: 480ms;
+	--duration-glacial: 800ms;
+
+	/* --------------------------------------------------------------------------
+	   Motion — Timing Functions
+	   -------------------------------------------------------------------------- */
+	--ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-in: cubic-bezier(0.4, 0, 1, 1);
+	--ease-out: cubic-bezier(0, 0, 0.2, 1);
+	--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+	/* --------------------------------------------------------------------------
+	   Motion — Composite Transitions
+	   -------------------------------------------------------------------------- */
+	--transition-fast: var(--duration-fast) var(--ease-default);
+	--transition-normal: var(--duration-normal) var(--ease-default);
+	--transition-slow: var(--duration-slow) var(--ease-out);
+}

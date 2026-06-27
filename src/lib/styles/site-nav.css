@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Site Navigation
+   ========================================================================== */
+
+.site-nav {
+	display: flex;
+	align-items: center;
+	gap: var(--space-6);
+	flex-shrink: 0;
+	padding-top: var(--space-2);
+}
+
+.site-nav__link {
+	font-family: var(--font-body);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-snug);
+	letter-spacing: var(--letter-spacing-wider);
+	text-transform: uppercase;
+	color: var(--color-text);
+	text-decoration: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.site-nav__link--active {
+	text-decoration: underline;
+	text-underline-offset: var(--space-1);
+}
+
+.site-nav__info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--space-5);
+	height: var(--space-5);
+	font-family: var(--font-body);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-regular);
+	color: var(--color-text);
+	background: none;
+	border: var(--border-width-thin) solid var(--color-text);
+	border-radius: var(--radius-full);
+	cursor: pointer;
+	padding: 0;
+}

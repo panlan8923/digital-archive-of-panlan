@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Bookshelf — mounted shelf with thickness and cast shadow
+   ========================================================================== */
+
+.bookshelf-row {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.bookshelf-row__books {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: var(--book-gap);
+	padding-bottom: 0;
+	margin-bottom: calc(-1 * var(--space-1));
+	position: relative;
+	z-index: 1;
+}
+
+.bookshelf-row__shelf {
+	width: 100%;
+	height: var(--shelf-thickness);
+	background: linear-gradient(
+		180deg,
+		var(--color-surface-highlight) 0%,
+		var(--color-surface) 35%,
+		var(--color-surface-shadow) 100%
+	);
+	box-shadow: var(--shadow-shelf);
+	position: relative;
+	z-index: 0;
+}
+
+/* Underside ambient occlusion where shelf meets the wall */
+.bookshelf-row__shelf::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	height: 2rem;
+	background: linear-gradient(
+		180deg,
+		rgba(0, 0, 0, 0.1) 0%,
+		rgba(0, 0, 0, 0.04) 35%,
+		transparent 100%
+	);
+	pointer-events: none;
+}
+
+/* Front lip catching light */
+.bookshelf-row__shelf::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.5) 0%,
+		var(--color-edge-light) 50%,
+		rgba(255, 255, 255, 0.5) 100%
+	);
+	pointer-events: none;
+}
