@@ -40,16 +40,29 @@
 }
 
 .site-identity__title-line {
-	opacity: 1;
-	transform: translateY(0);
-	transition:
-		opacity 2000ms var(--ease-out),
-		transform 2000ms var(--ease-out);
+	display: block;
+	min-height: 1.1em;
 }
 
-.site-identity__title-line--pending {
-	opacity: 0;
-	transform: translateY(6px);
+.site-identity__cursor {
+	display: inline-block;
+	width: 0.55em;
+	height: 0.9em;
+	margin-left: 0.08em;
+	vertical-align: -0.08em;
+	background: currentColor;
+	animation: archive-index-cursor-blink 900ms step-end infinite;
+}
+
+@keyframes archive-index-cursor-blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
 }
 
 .site-identity__subtitle,

@@ -10,7 +10,7 @@
 
 	const PHASE_MS = 2000;
 	const TOTAL_MS = 4000;
-	const DIVIDER_START_MS = 500;
+	const DIVIDER_START_MS = 1500;
 	const BOOKS_START_MS = PHASE_MS;
 	const BOOK_STAGGER_MS = Math.floor(PHASE_MS / archiveEntryCount);
 	const STATUS_COMPLETE_MS = TOTAL_MS - 200;
@@ -29,7 +29,7 @@
 			play,
 			isIndexing: play,
 			plainBackground: play,
-			titleVisible: !play,
+			typewriterActive: play,
 			dividerVisible: false,
 			metaVisible: !play,
 			navVisible: !play,
@@ -47,7 +47,7 @@
 
 	let isIndexing = $state(initialIndexState.isIndexing);
 	let plainBackground = $state(initialIndexState.plainBackground);
-	let titleVisible = $state(initialIndexState.titleVisible);
+	let typewriterActive = $state(initialIndexState.typewriterActive);
 	let dividerVisible = $state(initialIndexState.dividerVisible);
 	let metaVisible = $state(initialIndexState.metaVisible);
 	let navVisible = $state(initialIndexState.navVisible);
@@ -74,10 +74,6 @@
 		const schedule = (delay: number, fn: () => void) => {
 			timeouts.push(setTimeout(fn, delay));
 		};
-
-		schedule(0, () => {
-			titleVisible = true;
-		});
 
 		schedule(DIVIDER_START_MS, () => {
 			dividerVisible = true;
@@ -132,7 +128,7 @@
 	class:gallery-page--indexing={isIndexing}
 >
 	<div class="gallery-page__main">
-		<SiteHeader {titleVisible} {metaVisible} {navVisible} {dividerVisible} />
+		<SiteHeader {typewriterActive} {metaVisible} {navVisible} {dividerVisible} />
 
 		<div class="gallery-page__gallery">
 			<ArchiveGallery {selectedId} {revealedCount} onselect={handleSelect} />

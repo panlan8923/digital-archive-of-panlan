@@ -3,14 +3,14 @@
 	import SiteNav from '$lib/components/layout/SiteNav.svelte';
 
 	interface Props {
-		titleVisible?: boolean;
+		typewriterActive?: boolean;
 		metaVisible?: boolean;
 		navVisible?: boolean;
 		dividerVisible?: boolean;
 	}
 
 	let {
-		titleVisible = true,
+		typewriterActive = false,
 		metaVisible = true,
 		navVisible = true,
 		dividerVisible = false
@@ -19,7 +19,7 @@
 
 <header class="site-header">
 	<div class="site-header__row">
-		<SiteIdentity {titleVisible} {metaVisible} />
+		<SiteIdentity {typewriterActive} {metaVisible} />
 		<SiteNav visible={navVisible} />
 	</div>
 	<div class="archive-index-divider" class:archive-index-divider--visible={dividerVisible}></div>
